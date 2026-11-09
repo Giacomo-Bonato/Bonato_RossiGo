@@ -1,19 +1,27 @@
 package org.example;
 
 public class Monopattino extends Veicolo {
+    private final double velocitaMassima;
 
-    double velocitamax;
-
-    public Monopattino(int codice, double batteria, boolean stato, double velocitamax) {
-        super(codice, batteria, stato);
-        this.velocitamax = velocitamax;
+    public Monopattino(String codice, double livelloBatteria, double velocitaMassima) {
+        super(codice, livelloBatteria);
+        if (velocitaMassima <= 0) {
+            throw new IllegalArgumentException("La velocità massima deve essere positiva");
+        }
+        this.velocitaMassima = velocitaMassima;
     }
 
-    double calcolaCosto(int minuti) {
-        return minuti * 0.5;
+    @Override
+    public double calcolaCosto(int minuti) {
+        return minuti * 0.25;
     }
 
-    double consumoBatteriaPerMinuto() {
-        return 1;
+    @Override
+    public double consumoBatteriaPerMinuto() {
+        return 0.1;
+    }
+
+    public double getVelocitaMassima() {
+        return velocitaMassima;
     }
 }

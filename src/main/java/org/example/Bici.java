@@ -1,22 +1,27 @@
 package org.example;
 
 public class Bici extends Veicolo {
-    int marce;
+    private final int numeroMarce;
 
-    public Bici(int codice, double batteria, boolean stato, int marce) {
-        super(codice, batteria, stato);
-        this.marce = marce;
+    public Bici(String codice, double livelloBatteria, int numeroMarce) {
+        super(codice, livelloBatteria);
+        if (numeroMarce < 1) {
+            throw new IllegalArgumentException("La bici deve avere almeno una marcia");
+        }
+        this.numeroMarce = numeroMarce;
     }
 
-    double calcolaCosto(int minuti) {
-        return minuti * 0.25;
+    @Override
+    public double calcolaCosto(int minuti) {
+        return minuti * 0.15;
     }
 
-    double consumoBatteriaPerMinuto() {
-        return 0.5;
-    }
-    int getMarce() {
-        return marce;
+    @Override
+    public double consumoBatteriaPerMinuto() {
+        return 0.05;
     }
 
+    public int getNumeroMarce() {
+        return numeroMarce;
+    }
 }
